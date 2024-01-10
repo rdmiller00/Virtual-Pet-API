@@ -10,10 +10,10 @@ private int age;
 private int hunger;
 private int thirst;
 // Constructors-----------------------------------------------------------------------------------------------|
-public CatClass(String name, String color, int age, int hunger, int thirst) {
+public CatClass(String name, String breed, int age, int hunger, int thirst) {
     // this.petId = petId;
     this.name = name;
-    this.color = color;
+    this.breed = color;
     this.age = age;
     this.hunger = hunger;
     this.thirst = thirst;
@@ -32,10 +32,10 @@ public String getName() {
 public void setName(String name) {
     this.name = name;
 }
-public String getColor() {
+public String getBreed() {
     return color;
 }
-public void setColor(String color) {
+public void setBreed(String color) {
     this.color = color;
 }
 public int getAge() {
