@@ -27,8 +27,7 @@ public class Shelter {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String shelterName;
 
-    public Shelter(Integer id, String shelterState, String shelterName) {
-        this.id = id;
+    public Shelter(String shelterState, String shelterName) {
         this.shelterState = shelterState;
         this.shelterName = shelterName;
     }

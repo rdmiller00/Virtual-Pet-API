@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.api.virtualpet.Models.Pet;
+import com.api.virtualpet.Models.Shelter;
 import com.api.virtualpet.Repositories.PetRepository;
 import com.api.virtualpet.Repositories.ShelterRepository;
 
@@ -25,17 +26,27 @@ public class PetController {
 
     @GetMapping("/api/pets")
     public ResponseEntity<List<Pet>> getAllPets() {
-        List<Pet> dogs = petRepository.findAll();
-        if (dogs.isEmpty()) {
-            throw new EntityNotFoundException("There are currently no dogs in the shelter");
+        List<Pet> pets = petRepository.findAll();
+        if (pets.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+
+        return new ResponseEntity<>(pets, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/api/shelter/{shelterId}/pets")
+    public ResponseEntity<List<Pet>> getAllPetsByShelterId(@PathVariable Integer shelterId){
+        if (!shelterRepository.existsById(shelterId)) {
+            throw new EntityNotFoundException("Shelter With ID: " + shelterId + " NotFound!");
         }
 
-        return new ResponseEntity<>(dogs, HttpStatus.OK);
+        List<Shelter> shelters = shelterRepository.getByShelterId(shelterId);
+        return new ResponseEntity<>(shelters, HttpStatus.OK);
     }
 
     @GetMapping("/api/{petType}/{breed}")
-    public ResponseEntity<List<Dog>> getDogsByBreed(@PathVariable("breed") String breed) {
-        List<Dog> dogs = dogRepository.findByBreed(breed); // does this List need to be an Optional? I could not get it to work with Optional
+    public ResponseEntity<List<Pet>> getDogsByBreed(@PathVariable("breed") String breed) {
+        List<Pet> dogs = dogRepository.findByBreed(breed); // does this List need to be an Optional? I could not get it to work with Optional
 
         if (dogs.isEmpty()) {
             throw new EntityNotFoundException("There are currently no " + breed + "s in the shelter");
@@ -47,5 +58,5 @@ public class PetController {
     // @PostMapping("/api/shelter/{petType}")
     // public ResponseEntity<Dog> createDog (@PathVariable(value = "petType") String petType
     // @RequestBody Dog
-
+    }
 }

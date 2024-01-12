@@ -8,13 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.virtualpet.Models.Shelter;
 import com.api.virtualpet.Repositories.ShelterRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 
@@ -45,11 +44,11 @@ public class ShelterController {
     }
 
     @PostMapping("/api/shelters")
-    public ResponseEntity<Shelter> createShelter(@RequestBody Shelter shelter) {
-        Shelter _shelter = shelterRepository
-        .save(new Shelter(shelter.getShelterState(), shelter.getShelterName()));
-        
-        return new ResponseEntity<Shelter>(HttpStatus.CREATED);
-    }
+public ResponseEntity<Shelter> createShelter(@RequestBody Shelter shelter) {
+    Shelter _shelter = shelterRepository.save(new Shelter(shelter.getShelterState(), shelter.getShelterName()));
     
+    return new ResponseEntity<>(_shelter, HttpStatus.CREATED);
+}
+
+
 }
