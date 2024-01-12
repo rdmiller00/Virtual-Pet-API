@@ -14,4 +14,6 @@ public interface PetRepository extends JpaRepository<Pet, Integer>{
     List<Pet> findByBreed(String breed);
 
     List<Pet> findByPetTypeAndShelterId(String petType, Integer shelterId);
+
+    List<Pet> findByPetType(String petType);
 }

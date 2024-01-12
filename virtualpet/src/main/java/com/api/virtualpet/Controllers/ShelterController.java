@@ -32,7 +32,7 @@ public class ShelterController {
         }
     }
 
-    @GetMapping("/api/shelter/{id}")
+    @GetMapping("/api/shelters/{id}")
     public ResponseEntity<Shelter> getShelterById(@PathVariable("id") Integer id) {
         Optional<Shelter> shelter = shelterRepository.findById(id);
 
