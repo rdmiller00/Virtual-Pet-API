@@ -71,6 +71,7 @@ public class PetController {
             @RequestBody Pet petRequest) {
         Pet pet = shelterRepository.findById(shelterId).map(shelter -> {
             petRequest.setShelter(shelter);
+            System.out.println(petRequest); //when you are having errors, try a SOUT to check your object
             return petRepository.save(petRequest);
         }).orElseThrow(() -> new EntityNotFoundException("Shelter with ID: " + shelterId + " Not Found"));
 

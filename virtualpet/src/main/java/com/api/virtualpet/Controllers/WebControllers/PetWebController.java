@@ -17,28 +17,28 @@ public class PetWebController {
     @Autowired
     PetRepository petRepository;
 
-    @GetMapping("/api/shelters/dogs")
+    @GetMapping("/shelters/dogs")
     public String displayDogs(Model model) {
         List<Pet> dogs = petRepository.findByPetType("Dog");
         model.addAttribute("dogs", dogs);
         return "dogs";
     }
 
-    @GetMapping("/api/shelters/cats")
+    @GetMapping("/shelters/cats")
     public String displayCats(Model model) {
         List<Pet> cats = petRepository.findByPetType("Cat");
         model.addAttribute("cats", cats);
         return "cats";
     }
 
-    @GetMapping("/api/shelters/pets")
+    @GetMapping("/shelters/pets")
     public String displayAllPets(Model model) {
         List<Pet> allPets = petRepository.findAll();
         model.addAttribute("allPets", allPets);
         return "allPets";
     }
 
-    @PostMapping("api/pets")
+    @PostMapping("/pets")
     public String createPet(@ModelAttribute("pet") Pet pet, Model model) {
         petRepository.save(pet);
         List<Pet> pets = petRepository.findAll();

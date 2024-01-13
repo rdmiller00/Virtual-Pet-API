@@ -49,7 +49,6 @@ public class Pet {
 
     public Pet(Integer id, Shelter shelter, String petName, String petType, String breed, Integer hungerLevel,
             Integer thirstLevel) {
-        this.id = id;
         this.shelter = shelter;
         this.petName = petName;
         this.petType = petType;
